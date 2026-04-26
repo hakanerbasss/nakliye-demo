@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ANATOLIA LOJİSTİK | Nakliye ve Taşımacılık</title>
+    <meta name="description" content="Anadolu'nun dört bir yanına güvenli, hızlı ve ekonomik nakliye hizmeti.">
+    <style>
+        /* ===== RESET & BASE ===== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #1a1a2e;
+            background: #f8f9fa;
+            line-height: 1.6;
+        }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+        img { max-width: 100%; display: block; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+        /* ===== HEADER / NAV ===== */
+        header {
+            background: #0f3460;
+            color: #fff;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            transition: background 0.3s;
+        }
+        header.scrolled { background: #0a2647; }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+        .logo span { color: #e94560; }
+        .logo i { margin-right: 8px; }
+        .nav-links { display: flex; gap: 30px; align-items: center; }
+        .nav-links a {
+            color: #e0e0e0;
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 1rem;
+        }
+        .nav-links a:hover { color: #e94560; }
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+        .hamburger span {
+            width: 28px; height: 3px;
+            background: #fff;
+            border-radius: 2px;
+            transition: 0.3s;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%);
+            color: #fff;
+            padding: 160px 20px 100px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle at 30% 50%, rgba(233,69,96,0.08) 0%, transparent 60%);
+            animation: float 12s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translate(0,0); }
+            50% { transform: translate(30px,-30px); }
+        }
+        .hero h1 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero h1 span { color: #e94560; }
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 650px;
+            margin: 0 auto 40px;
+            color: #c0c0d0;
+            position: relative;
+            z-index: 1;
+        }
+        .btn {
+            display: inline-block;
+            padding: 14px 38px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+        }
+        .btn-primary {
+            background: #e94560;
+            color: #fff;
+        }
+        .btn-primary:hover {
+            background: #d63851;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(233,69,96,0.4);
+        }
+        .btn-outline {
+            background: transparent;
+            color: #fff;
+            border: 2px solid #e94560;
+            margin-left: 15px;
+        }
+        .btn-outline:hover {
+            background: #e94560;
+            transform: translateY(-2px);
+        }
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            margin-top: 60px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero-stats .stat {
+            text-align: center;
+        }
+        .hero-stats .stat h3 {
+            font-size: 2.5rem;
+            color: #e94560;
+        }
+        .hero-stats .stat p {
+            font-size: 0.9rem;
+            margin: 5px 0 0;
+            color: #a0a0b8;
+        }
+
+        /* ===== SECTIONS ===== */
+        section { padding: 90px 20px; }
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        .section-title span { color: #e94560; }
+        .section-sub {
+            text-align: center;
+            color: #6c757d;
+            margin-bottom: 50px;
+            font-size: 1.1rem;
+        }
+
+        /* ===== ABOUT ===== */
+        .about { background: #fff; }
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+        .about-image {
+            background: linear-gradient(135deg, #0f3460, #1a1a2e);
+            border-radius: 20px;
+            padding: 40px;
+            color: #fff;
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .about-image::after {
+            content: '🚛';
+            font-size: 8rem;
+            position: absolute;
+            bottom: -20px;
+            right: -10px;
+            opacity: 0.1;
+        }
+        .about-image h3 { font-size: 1.8rem; margin-bottom: 10px; }
+        .about-image p { color: #c0c0d0; }
+        .about-text h3 { font-size: 1.6rem; margin-bottom: 15px; color: #0f3460; }
+        .about-text p { color: #555; margin-bottom: 20px; }
+        .about-features { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .about-features li {
+            display: flex; align-items: center; gap: 10px;
+            color: #333; font-weight: 500;
+        }
+        .about-features li::before { content: '✅'; }
+
+        /* ===== SERVICES ===== */
+        .services { background: #f8f9fa; }
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        .service-card {
+            background: #fff;
+            padding: 40px 30px;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.06);
+            transition: all 0.4s;
+            border: 1px solid #eee;
+        }
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            border-color: #e94560;
+        }
+        .service-card .icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        .service-card h3 { font-size: 1.3rem; margin-bottom: 12px; color: #0f3460; }
+        .service-card p { color: #666; font-size: 0.95rem; }
+
+        /* ===== FLEET ===== */
+        .fleet { background: #fff; }
+        .fleet-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        .fleet-card {
+            background: #f8f9fa;
+            border-radius: 16px;
+            padding: 30px;
+            text-align: center;
+            transition: 0.3s;
+            border: 1px solid #e0e0e0;
+        }
+        .fleet-card:hover { border-color: #e94560; }
+        .fleet-card .vehicle-icon { font-size: 3.5rem; margin-bottom: 15px; }
+        .fleet-card h4 { color: #0f3460; font-size: 1.2rem; }
+        .fleet-card p { color: #666; font-size: 0.9rem; margin-top: 8px; }
+
+        /* ===== TESTIMONIALS ===== */
+        .testimonials { background: #0f3460; color: #fff; }
+        .testimonials .section-title { color: #fff; }
+        .testimonials .section-sub { color: #a0a0b8; }
+        .testi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .testi-card {
+            background: rgba(255,255,255,0.07);
+            padding: 30px;
+            border-radius: 16px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .testi-card .stars { color: #ffc107; margin-bottom: 10px; font-size: 1.2rem; }
+        .testi-card p { color: #d0d0e0; font-style: italic; margin-bottom: 15px; }
+        .testi-card .author { font-weight: 700; color: #e94560; }
+
+        /* ===== CONTACT ===== */
+        .contact { background: #fff; }
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+        .contact-info h3 { font-size: 1.5rem; color: #0f3460; margin-bottom: 20px; }
+        .contact-info .info-item {
+            display: flex; gap: 15px; margin-bottom: 20px;
+        }
+        .contact-info .info-item .ci-icon {
+            font-size: 1.5rem; min-width: 40px;
+        }
+        .contact-info .info-item h4 { color: #0f3460; }
+        .contact-info .info-item p { color: #666; }
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 14px 18px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            font-size: 1rem;
+            transition: 0.3s;
+            font-family: inherit;
+        }
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color: #e94560;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(233,69,96,0.15);
+        }
+        .contact-form textarea { height: 120px; resize: vertical; }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: #0a2647;
+            color: #c0c0d0;
+            padding: 50px 20px 30px;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .footer-col h4 {
+            color: #fff;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+        .footer-col p { font-size: 0.95rem; line-height: 1.8; }
+        .footer-col ul li { margin-bottom: 10px; }
+        .footer-col ul li a { color: #a0a0b8; transition: 0.3s; }
+        .footer-col ul li a:hover { color: #e94560; }
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            font-size: 0.9rem;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 992px) {
+            .about-grid, .contact-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 2.5rem; }
+            .hero-stats { gap: 30px; flex-wrap: wrap; }
+            .hero-stats .stat h3 { font-size: 2rem; }
+        }
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 70px; left: 0; width: 100%;
+                background: #0f3460;
+                flex-direction: column;
+                padding: 20px;
+                gap: 15px;
+                border-top: 1px solid rgba(255,255,255,0.1);
+            }
+            .nav-links.active { display: flex; }
+            .hamburger { display: flex; }
+            .hero { padding: 120px 20px 80px; }
+            .hero h1 { font-size: 2rem; }
+            .hero p { font-size: 1rem; }
+            .btn-outline { margin-left: 0; margin-top: 10px; }
+            .section-title { font-size: 1.8rem; }
+            .about-features { grid-template-columns: 1fr; }
+            .hero-stats { flex-direction: column; gap: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header id="header">
+    <div class="navbar">
+        <div class="logo">🚛 <span>Anatolia</span> Lojistik</div>
+        <div class="hamburger" id="hamburger" aria-label="Menü">
+            <span></span><span></span><span></span>
+        </div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#about">Hakkımızda</a></li>
+            <li><a href="#services">Hizmetler</a></li>
+            <li><a href="#fleet">Filo</a></li>
+            <li><a href="#testimonials">Müşteriler</a></li>
+            <li><a href="#contact">İletişim</a></li>
+        </ul>
+    </div>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="home">
+    <h1>Yükünüzü <span>Güvene</span> Alın</h1>
+    <p>Anadolu'nun dört bir yanına parsiyel, komple ve depolama çözümleriyle 7/24 lojistik hizmeti.</p>
+    <div>
+        <a href="#contact" class="btn btn-primary">Hemen Teklif Al</a>
+        <a href="#services" class="btn btn-outline">Hizmetlerimiz</a>
+    </div>
+    <div class="hero-stats">
+        <div class="stat"><h3>15+</h3><p>Yıllık Deneyim</p></div>
+        <div class="stat"><h3>1.200+</h3><p>Mutlu Müşteri</p></div>
+        <div class="stat"><h3>85</h3><p>Araçlık Filo</p></div>
+        <div class="stat"><h3>81</h3><p>İl'e Teslimat</p></div>
+    </div>
+</section>
+
+<!-- ===== ABOUT ===== -->
+<section class="about" id="about">
+    <div class="container">
+        <h2 class="section-title">Hakkımızda</h2>
+        <p class="section-sub">2009'dan beri Türkiye'nin yükünü taşıyoruz</p>
+        <div class="about-grid">
+            <div class="about-image">
+                <h3>Anatolia Lojistik</h3>
+                <p>Güven, hız ve kalite odaklı lojistik çözüm ortağınız.</p>
+            </div>
+            <div class="about-text">
+                <h3>Neden Biz?</h3>
+                <p>15 yılı aşkın süredir yurt içi nakliye sektöründe faaliyet gösteriyor, müşterilerimize en uygun fiyat – en güvenli teslimat prensibiyle hizmet veriyoruz. Modern araç filomuz ve deneyimli ekibimizle her büyüklükteki yükünüzü zamanında ve hasarsız şekilde ulaştırıyoruz.</p>
+                <ul class="about-features">
+                    <li>Sigortalı taşımacılık</li>
+                    <li>GPS takip sistemi</li>
+                    <li>7/24 müşteri desteği</li>
+                    <li>Anında fiyat teklifi</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== SERVICES ===== -->
+<section class="services" id="services">
+    <div class="container">
+        <h2 class="section-title">Hizmetlerimiz</h2>
+        <p class="section-sub">İhtiyacınıza özel lojistik çözümler</p>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="icon">📦</div>
+                <h3>Parsiyel Taşıma</h3>
+                <p>Küçük ve orta ölçekli yüklerinizi diğer gönderilerle birleştirerek ekonomik taşıma.</p>
+            </div>
+            <div class="service-card">
+                <div class="icon">🚛</div>
+                <h3>Komple Taşıma</h3>
+                <p>Tüm aracın size özel olduğu, büyük hacimli yükler için direkt sevkiyat.</p>
+            </div>
+            <div class="service-card">
+                <div class="icon">🏭</div>
+                <h3>Depolama & Antrepo</h3>
+                <p>5.000 m² kapalı alanda güvenli depolama ve stok yönetimi hizmeti.</p>
+            </div>
+            <div class="service-card">
+                <div class="icon">📋</div>
+                <h3>Ev & Ofis Taşıma</h3>
+                <p>Profesyonel ambalaj, montaj/demontaj ile taşınma sürecinizi stressiz hale getiriyoruz.</p>
+            </div>
+            <div class="service-card">
+                <div class="icon">🌡️</div>
+                <h3>Soğuk Zincir</h3>
+                <p>Isı kontrollü araçlarla gıda, ilaç ve hassas ürün taşımacılığı.</p>
+            </div>
+            <div class="service-card">
+                <div class="icon">📡</div>
+                <h3>Proje Lojistiği</h3>
+                <p>Özel projeleriniz için planlı, koordineli ve anahtar teslim lojistik çözümler.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== FLEET ===== -->
+<section class="fleet" id="fleet">
+    <div class="container">
+        <h2 class="section-title">Filo</h2>
+        <p class="section-sub">85 aracımızla her an yollardayız</p>
+        <div class="fleet-grid">
+            <div class="fleet-card">
+                <div class="vehicle-icon">🚚</div>
+                <h4>Kamyon (10-26 ton)</h4>
+                <p>45 adet • 2022-2024 model • GPS donanımlı</p>
+            </div>
+            <div class="fleet-card">
+                <div class="vehicle-icon">🚛</div>
+                <h4>Tır & Çekici</h4>
+                <p>20 adet • 40 ft konteyner kapasiteli</p>
+            </div>
+            <div class="fleet-card">
+                <div class="vehicle-icon">🚐</div>
+                <h4>Kamyonet (3.5 ton)</h4>
+                <p>15 adet • Şehir içi hızlı dağıtım</p>
+            </div>
+            <div class="fleet-card">
+                <div class="vehicle-icon">❄️</div>
+                <h4>Soğutuculu Araçlar</h4>
+                <p>5 adet • -20°C ile +8°C arası</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== TESTIMONIALS ===== -->
+<section class="testimonials" id="testimonials">
+    <div class="container">
+        <h2 class="section-title">Müşterilerimiz Ne Diyor?</h2>
+        <p class="section-sub">Binlerce memnun müşterimizden sadece birkaçı</p>
+        <div class="testi-grid">
+            <div class="testi-card">
+                <div class="stars">★★★★★</div>
+                <p>"Yıllardır çalıştığımız en güvenilir nakliye firması. Zamanında teslimat ve hasarsız hizmet her zaman."</p>
+                <div class="author">– Mehmet Yılmaz, ABC Tekstil</div>
+            </div>
+            <div class="testi-card">
+                <div class="stars">★★★★★</div>
+                <p>"Ev taşınmasında olağanüstü bir profesyonellik gösterdiler. Her şey dakikasında planlandı."</p>
+                <div class="author">– Ayşe Demir, Özel Müşteri</div>
+            </div>
+            <div class="testi-card">
+                <div class="stars">★★★★★</div>
+                <p>"Depolama ve lojistik süreçlerimizi tamamen onlara devrettik. Stok takibi mükemmel."</p>
+                <div class="author">– Ali Karaca, Karaca Gıda A.Ş.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section class="contact" id="contact">
+    <div class="container">
+        <h2 class="section-title">İletişim</h2>
+        <p class="section-sub">Size özel teklif için hemen ulaşın</p>
+        <div class="contact-grid">
+            <div class="contact-info">
+                <h3>Bize Ulaşın</h3>
+                <div class="info-item">
+                    <div class="ci-icon">📍</div>
+                    <div>
+                        <h4>Adres</h4>
+                        <p>İstanbul Cad. No:42, Küçükçekmece / İstanbul</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="ci-icon">📞</div>
+                    <div>
+                        <h4>Telefon</h4>
+                        <p>+90 212 444 0 789</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="ci-icon">📧</div>
+                    <div>
+                        <h4>E-Posta</h4>
+                        <p>info@anatolialojistik.com.tr</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="ci-icon">🕐</div>
+                    <div>
+                        <h4>Çalışma Saatleri</h4>
+                        <p>Hafta içi 08:00 – 19:00 / Cumartesi 09:00 – 15:00</p>
+                    </div>
+                </div>
+            </div>
+            <form class="contact-form" id="contactForm">
+                <input type="text" placeholder="Adınız Soyadınız" required>
+                <input type="tel" placeholder="Telefon Numaranız">
+                <input type="email" placeholder="E-Posta Adresiniz" required>
+                <select style="width:100%;padding:14px 18px;border:1px solid #ddd;border-radius:10px;margin-bottom:15px;font-size:1rem;">
+                    <option>Hizmet Seçiniz</option>
+                    <option>Parsiyel Taşıma</option>
+                    <option>Komple Taşıma</option>
+                    <option>Ev & Ofis Taşıma</option>
+                    <option>Depolama</option>
+                    <option>Diğer</option>
+                </select>
+                <textarea placeholder="Mesajınız (kalkış/varış noktası, yük bilgisi vb.)" required></textarea>
+                <button type="submit" class="btn btn-primary" style="width:100%">📨 Teklif İste</button>
+                <p style="margin-top:15px;font-size:0.85rem;color:#888;text-align:center;" id="formFeedback"></p>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+    <div class="footer-grid">
+        <div class="footer-col">
+            <h4>🚛 Anatolia Lojistik</h4>
+            <p>2009'dan beri Türkiye'nin dört bir yanına güvenli, hızlı ve ekonomik nakliye hizmeti sunuyoruz.</p>
+        </div>
+        <div class="footer-col">
+            <h4>Hızlı Linkler</h4>
+            <ul>
+                <li><a href="#about">Hakkımızda</a></li>
+                <li><a href="#services">Hizmetler</a></li>
+                <li><a href="#fleet">Filo</a></li>
+                <li><a href="#contact">İletişim</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>Hizmetler</h4>
+            <ul>
+                <li><a href="#services">Parsiyel Taşıma</a></li>
+                <li><a href="#services">Komple Taşıma</a></li>
+                <li><a href="#services">Ev & Ofis Taşıma</a></li>
+                <li><a href="#services">Soğuk Zincir</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>İletişim</h4>
+            <ul>
+                <li>📞 +90 212 444 0 789</li>
+                <li>📧 info@anatolialojistik.com.tr</li>
+                <li>📍 İstanbul, Türkiye</li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        &copy; 2026 Anatolia Lojistik. Tüm hakları saklıdır. | Demo site
+    </div>
+</footer>
+
+<script>
+    // Hamburger menü
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+    hamburger.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+    });
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+        });
+    });
+
+    // Header scroll efekti
+    window.addEventListener('scroll', () => {
+        const header = document.getElementById('header');
+        if (window.scrollY > 50) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    });
+
+    // Form feedback
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const feedback = document.getElementById('formFeedback');
+        feedback.textContent = '✅ Mesajınız alındı! En kısa sürede size dönüş yapacağız. (Demo)';
+        feedback.style.color = '#28a745';
+        this.reset();
+    });
+
+    // İstatistik sayacı animasyonu
+    function animateCounters() {
+        const stats = document.querySelectorAll('.hero-stats .stat h3');
+        stats.forEach(stat => {
+            const text = stat.textContent;
+            const num = parseInt(text);
+            if (isNaN(num)) return;
+            const suffix = text.replace(num, '');
+            let current = 0;
+            const step = Math.ceil(num / 40);
+            const timer = setInterval(() => {
+                current += step;
+                if (current >= num) {
+                    current = num;
+                    clearInterval(timer);
+                }
+                stat.textContent = current + suffix;
+            }, 40);
+        });
+    }
+
+    // Sayfa yüklendiğinde çalıştır
+    window.addEventListener('load', () => {
+        setTimeout(animateCounters, 500);
+    });
+
+    // Smooth scroll for all anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    });
+</script>
+</body>
+</html>
